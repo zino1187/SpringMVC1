@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 개발자가 HandlerMapping을 지정하지 않으면, DefaultAnnotationHandlerMaping이 적용된 
+		것임 -->
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 스프링 mvc 가 제대로 동작되는지 확인하기 위한 동생 컨트롤러 등록 -->
+	<bean id="testController" class="test.TestController" />
+
+	<!-- BoardController에게 주입할 DAO 등록 -->
+	<bean id="boardDAOMybatis" class="com.mvc.board.model.BoardDAOMybatis" />
+
+	<bean id="boardController" class="com.mvc.board.controller.BoardController">
+		<property name="boardDAO" ref="boardDAOMybatis"/>
+	</bean>
+	
+</beans>
+
+
+
+
+
+
+
+
+
